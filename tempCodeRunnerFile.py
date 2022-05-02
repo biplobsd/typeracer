@@ -1,0 +1,1 @@
+ms-illo-free-sidebar-promo.svg?v=47faa659a05e')
