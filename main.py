@@ -198,7 +198,7 @@ if __name__ == "__main__":
             driver.get(landing)
             time.sleep(1)
             fistPosition = isImFirstPosition()
-            if fistPosition and (loginUser.split('(')[0].strip() != isImFirstPosition().split('(')[0].strip()):
+            if fistPosition and (loginUser.split('(')[0].strip()[:5] != isImFirstPosition().split('(')[0].strip()[:5]):
                 print(f"I'm not first position. trying by speed {speed}")
                 main(speed)
             elif not fistPosition:
