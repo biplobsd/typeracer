@@ -3,6 +3,7 @@ import sys
 import requests
 import shutil
 import os
+import argparse
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -56,8 +57,8 @@ def login():
     if findLoginB:
         print("Trying to login ...")
         findLoginB.click()
-        username = sys.argv[1]
-        password = sys.argv[2]
+        username = args.u
+        password = args.p
         findUserBox = findopj(findPatterns.userBox)
         if findUserBox:
             findUserBox.send_keys(username)
@@ -163,6 +164,15 @@ def main(speed=0.5):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description='Auto geting blc exp. Just for fun!')
+    parser.add_argument('--justOne', type=str, help='Target just one mode')
+    parser.add_argument('--speed', type=str, help='Set your speed')
+    parser.add_argument(
+        '-l', action=argparse.BooleanOptionalAction, help='Set as infinity loop')
+    parser.add_argument('-u', type=str, help='Set your username')
+    parser.add_argument('-p', type=str, help='Set your password')
+    args = parser.parse_args()
 
     modes = ['', 'accuracy', 'dictionary', 'anime', 'lang_pt', 'lang_pt_dictionary', 'lang_es', 'jokes', 'repeat', 'games',
              'music', 'movies', 'copypasta', 'education', 'steno', 'lang_de', 'lang_id', 'lang_it', 'lang_fr', 'lang_nl', 'lang_pl']
@@ -191,17 +201,29 @@ if __name__ == "__main__":
         findCloseToggo = findopj(findPatterns.offcanasToggleClose, 2)
         if findCloseToggo:
             findCloseToggo.click()
-    for i, mode in enumerate(modes):
-        print(f'{i+1}/{len(modes)}', mode)
-        for speed in [0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]:
-            landing = f"https://play.typeracer.com/?universe={mode}"
-            driver.get(landing)
+    if args.justOne:
+        while True:
+            driver.get(args.justOne)
             time.sleep(1)
-            fistPosition = isImFirstPosition()
-            if fistPosition and (loginUser.split('(')[0].strip()[:5] != isImFirstPosition().split('(')[0].strip()[:5]):
-                print(f"I'm not first position. trying by speed {speed}")
-                main(speed)
-            elif not fistPosition:
-                main(0.5)
-            else:
+            main(args.speed if args.speed else 0.5)
+            if not args.l:
+                break
+    else:
+        while True:
+            for i, mode in enumerate(modes):
+                print(f'{i+1}/{len(modes)}', mode)
+                for speed in [0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]:
+                    landing = f"https://play.typeracer.com/?universe={mode}"
+                    driver.get(landing)
+                    time.sleep(1)
+                    fistPosition = isImFirstPosition()
+                    if fistPosition and (loginUser.split('(')[0].strip()[:5] != isImFirstPosition().split('(')[0].strip()[:5]):
+                        print(
+                            f"I'm not first position. trying by speed {speed}")
+                        main(speed)
+                    elif not fistPosition:
+                        main(0.5)
+                    else:
+                        break
+            if not args.l:
                 break
