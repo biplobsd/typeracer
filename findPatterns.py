@@ -11,6 +11,7 @@ closePopup = '//div[@title="close this popup"]'
 inputBox = '//input[@class="txtInput"]'
 gameStatus = '//div[text()="Go!" or text()="The race is on! Type the text below:"]'
 raceAgain = '//a[text()="Race again"]'
+firstPosition = "//td[text()='1']/../td/div[@class='userNameLabel']"
 
 # UserData
 userNameLabel = '//img[@class="user_profile_pic"]/../../div[@class="userNameLabel"]'
@@ -18,13 +19,13 @@ offcanasToggle = '//td[@id="offcanvas-toggle"]'
 offcanasToggleClose = '//div[@id="offcanvas-close"]'
 
 # Human varification
-beginTest = '//button[text()="Begin Test"]'
+beginTest = '//button[text()="Begin Test" or text()="Begin Re-test"]'
 challangeImg = '//img[@class="challengeImg"]'
 challangeInput = '//textarea[@class="challengeTextArea"]'
 challangeImgSubmit = '//button[text()="Submit"]'
 closePopup = '//div[@title="close this popup"]'
 
-# Yandex image search 
+# Yandex image search
 imageSearchButton = "//div[@class='cbir-icon input__cbir-button-icon']"
 imageUrl = '//input[@placeholder="Enter image URL"]'
 imageSubmitButton = '//span[text()="Search"]/..'
