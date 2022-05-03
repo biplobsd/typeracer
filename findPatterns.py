@@ -9,7 +9,7 @@ startRace = "//a[text()='Enter a Typing Race']"
 getTest = '//span[@unselectable="on"][3]/..'
 closePopup = '//div[@title="close this popup"]'
 inputBox = '//input[@class="txtInput"]'
-gameStatus = '//div[text()="Go!"]'
+gameStatus = '//div[text()="Go!" or text()="The race is on! Type the text below:"]'
 raceAgain = '//a[text()="Race again"]'
 
 # UserData

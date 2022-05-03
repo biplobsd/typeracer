@@ -96,20 +96,56 @@ def humanVarification():
                             findchallSubmit = findopj(findPatterns.challangeImgSubmit)
                             if findchallSubmit:
                                 findchallSubmit.click()
+                                time.sleep(2)
                                 findPassedClose = findopj(findPatterns.closePopup)
                                 if findPassedClose:
                                     findPassedClose.click()
 
+def main(mode):
+    landing = f"https://play.typeracer.com/?universe={mode}"
+    driver.get(landing)
+    time.sleep(1)
+    startbutton = findopj(findPatterns.startRace)
+    if startbutton:
+        startbutton.click()
+    
+    findclosePopup = findopj(findPatterns.closePopup, 10)
+    if findclosePopup:
+        findclosePopup.click()
+
+    findGo = findopj(findPatterns.gameStatus, 30)
+    if findGo:
+        findgetText = findopj(findPatterns.getTest)
+        if findgetText:
+            findInputBox = findopj(findPatterns.inputBox)
+            if findInputBox:
+                text = findgetText.text.split()
+                lenText = len(text)
+                for i,word in enumerate(text):
+                    time.sleep(0.4)
+                    print(word, end=' ')
+                    findInputBox.send_keys(word+' ' if i!=lenText-1 else word)
+    
+    humanVarification()
+    # findraceAgain = findopj(findPatterns.raceAgain, 20)
+
+    # if findraceAgain:
+    #     findraceAgain.click()
+    # else:
+    #     break
+    print()
+
 if __name__ == "__main__":
 
+
+    modes = ['accuracy','dictionary', 'anime', 'lang_pt', 'lang_pt_dictionary', 'lang_es', 'jokes', 'repeat', 'games', 'music', 'movies', 'copypasta', 'education', 'steno', 'lang_de', 'lang_id', 'lang_it', 'lang_fr', 'lang_nl', 'lang_pl']
     options = Options()
     # Hare your Edge user profile folder path. You can find in edge://version/ "Profile Path" section
     options.add_argument(
         r'--user-data-dir=C:\\Users\\alpha4d\\AppData\\Local\\Microsoft\\Edge\\User Data')
 
     driver = webdriver.Edge(options = options)
-
-    landing = "https://play.typeracer.com/"
+    landing = f"https://play.typeracer.com/"
     driver.get(landing)
     time.sleep(1)
     toggolClicked = False
@@ -127,32 +163,5 @@ if __name__ == "__main__":
         findCloseToggo = findopj(findPatterns.offcanasToggleClose, 2)
         if findCloseToggo:
             findCloseToggo.click()
-
-    startbutton = findopj(findPatterns.startRace)
-    if startbutton:
-        startbutton.click()
-    
-    findclosePopup = findopj(findPatterns.closePopup, 10)
-    if findclosePopup:
-        findclosePopup.click()
-    
-    while True:
-        findGo = findopj(findPatterns.gameStatus, 30)
-        if findGo:
-            findgetText = findopj(findPatterns.getTest)
-            if findgetText:
-                findInputBox = findopj(findPatterns.inputBox)
-                if findInputBox:
-                    for word in findgetText.text.split():
-                        time.sleep(0.2)
-                        print(word, end=' ')
-                        findInputBox.send_keys(word+' \n')
-        
-        humanVarification()
-        findraceAgain = findopj(findPatterns.raceAgain, 20)
-
-        if findraceAgain:
-            findraceAgain.click()
-        else:
-            break
-        print()
+    for mode in modes:
+        main(mode)
