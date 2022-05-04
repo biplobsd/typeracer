@@ -8,27 +8,42 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import UnexpectedAlertPresentException
 from selenium import webdriver
 from selenium.webdriver.edge.options import Options
 from io import BytesIO
 from PIL import Image
 import win32clipboard
-import findPatterns
+import lib.findPatterns as findPatterns
 import logging
 from selenium.webdriver.remote.remote_connection import LOGGER
+
+import lib.multipleAcccount as multipleAcccount
 LOGGER.setLevel(logging.CRITICAL)
 
 
-def findopj(pattern: str, delay: int = 10):
+def findopj(pattern: str, delay: int = 10, inputDriver=False):
+    """
+    Find object by visibile on page
+    """
+    if inputDriver:
+        driver = inputDriver
+        
     try:
         return WebDriverWait(driver, delay).until(
             EC.visibility_of_element_located((By.XPATH, pattern))
         )
+    except UnexpectedAlertPresentException:
+        time.sleep(2)
+        return False
     except TimeoutException:
         return False
 
 
 def imageToClipboard(img_path='img.png'):
+    """
+    From image path this function set this to clipboard.
+    """
     image = Image.open(img_path)
     output = BytesIO()
     image.convert('RGB').save(output, "BMP")
@@ -168,6 +183,7 @@ if __name__ == "__main__":
         description='Auto geting blc exp. Just for fun!')
     parser.add_argument('--justOne', type=str, help='Target just one mode')
     parser.add_argument('--speed', type=str, help='Set your speed')
+    parser.add_argument('--createAccounts', type=int, help='Create multiple accounts. It is required human for recapture solving.')
     parser.add_argument(
         '-l', action=argparse.BooleanOptionalAction, help='Set as infinity loop')
     parser.add_argument('-u', type=str, help='Set your username')
@@ -185,6 +201,10 @@ if __name__ == "__main__":
     landing = f"https://play.typeracer.com/"
     driver.get(landing)
     time.sleep(1)
+    if args.createAccounts:
+        print(f"Creating {args.createAccounts} accounts...")
+        multipleAcccount.multipleAccount(driver, count=args.createAccounts)
+        sys.exit()
     toggolClicked = False
     findtoggol = findopj(findPatterns.offcanasToggle, 2)
     if findtoggol:

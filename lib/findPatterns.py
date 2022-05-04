@@ -3,6 +3,16 @@ loginButton = "//a[text()='Sign In' and @class='gwt-Anchor']"
 userBox = "//input[@name='username']"
 passBox = "//input[@name='password']"
 submitButton = "//button[text()='Sign In']"
+clearAaccount = '//td[text()="Create an account"]'
+firstNamebox = "//td[text()='Name:']/../td[2]/div/input[1]"
+lastNamebox = "//td[text()='Name:']/../td[2]/div/input[2]"
+dateOfBirthMonth = "//select[@class='DirtyComboBox DirtyComboBox-unfocused']"
+dateOfBirthYear = "//input[@size='6']"
+createUsernamebox = "//input[@maxlength='30' and not(@name)]"
+createPasswordbox = "//td[text()='Password:']/../td/input"
+createRePasswordbox = "//td[text()='Re-enter Password:']/../td/input"
+signUpButton = "//button[text()='Sign Up!']"
+createEmail = "//td[text()='Email:']/../td/input"
 
 # Main page
 startRace = "//a[text()='Enter a Typing Race']"
@@ -12,6 +22,9 @@ inputBox = '//input[@class="txtInput"]'
 gameStatus = '//div[text()="Go!" or text()="The race is on! Type the text below:"]'
 raceAgain = '//a[text()="Race again"]'
 firstPosition = "//td[text()='1']/../td/div[@class='userNameLabel']"
+recapture = "//span[text()='Please confirm']"
+signOut = "//a[text()='Sign Out']"
+OK = "//button[text()='OK']"
 
 # UserData
 userNameLabel = '//img[@class="user_profile_pic"]/../../div[@class="userNameLabel"]'

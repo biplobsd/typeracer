@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -116,6 +115,14 @@ venv.bak/
 
 # Rope project settings
 .ropeproject
+accountNames.txt
+accountsCreated.txt
+msedgedriver.exe
+test.py
+**/*.jpg
+**/*.png
+tempCodeRunnerFile.py
+.vscode
 
 # mkdocs documentation
 /site
@@ -127,3 +134,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
