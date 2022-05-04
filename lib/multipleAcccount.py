@@ -1,17 +1,12 @@
 import time
 import string
 import random
-import lib.findPatterns as findPatterns
-from main import findopj as mainfindopj
+
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import ElementClickInterceptedException
 
-class Findopj:
-    def __init__(self, driver):
-        self.driver = driver
-
-    def findopj(self, *args, **kwargs):
-        return mainfindopj(*args, **kwargs, inputDriver=self.driver)
+from lib.findopj import Findopj
+import lib.findPatterns as findPatterns
 
 def id_generator(size=6, chars=string.ascii_lowercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -21,7 +16,7 @@ def readAccounts():
         return r.read()
 
 
-def multipleAccount(driver, count=20):
+def multipleAccount(driver, count=20, random=True):
     # accounts = readAccounts()
     m = Findopj(driver)
     
@@ -96,7 +91,7 @@ def multipleAccount(driver, count=20):
                         print(f"Account create successful {loginUser}")
                         with open("accountsCreated.txt", 'a') as w:
                             w.write(
-                                f'{firstName}{lastName}@gmail.com {firstName}{lastName}\n')
+                                f'{firstName}{lastName} {firstName}{lastName}\n')
                         findSignOut = m.findopj(findPatterns.signOut)
                         if findSignOut:
                             findSignOut.click()

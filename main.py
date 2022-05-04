@@ -14,18 +14,19 @@ from selenium.webdriver.edge.options import Options
 from io import BytesIO
 from PIL import Image
 import win32clipboard
-import lib.findPatterns as findPatterns
 import logging
 from selenium.webdriver.remote.remote_connection import LOGGER
 
+import lib.findPatterns as findPatterns
+from lib.speedControl import speeds
 import lib.multipleAcccount as multipleAcccount
-LOGGER.setLevel(logging.CRITICAL)
 
 
 def findopj(pattern: str, delay: int = 10, inputDriver=False):
     """
     Find object by visibile on page
     """
+    global driver
     if inputDriver:
         driver = inputDriver
         
@@ -83,6 +84,7 @@ def login():
                 findSubmitbutton = findopj(findPatterns.submitButton)
                 if findSubmitbutton:
                     findSubmitbutton.click()
+                    time.sleep(5)
 
 
 def loginCheck():
@@ -134,6 +136,10 @@ def humanVarification():
                                         findPatterns.closePopup)
                                     if findPassedClose:
                                         findPassedClose.click()
+                    else:
+                        driver.close()
+                        driver.switch_to.window(driver.window_handles[0])
+                        return
 
 
 def isImFirstPosition():
@@ -179,6 +185,7 @@ def main(speed=0.5):
 
 
 if __name__ == "__main__":
+    LOGGER.setLevel(logging.CRITICAL)
     parser = argparse.ArgumentParser(
         description='Auto geting blc exp. Just for fun!')
     parser.add_argument('--justOne', type=str, help='Target just one mode')
@@ -232,7 +239,7 @@ if __name__ == "__main__":
         while True:
             for i, mode in enumerate(modes):
                 print(f'{i+1}/{len(modes)}', mode)
-                for speed in [0.2, 0.2, 0.2, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]:
+                for speed in speeds:
                     landing = f"https://play.typeracer.com/?universe={mode}"
                     driver.get(landing)
                     time.sleep(1)
