@@ -39,7 +39,7 @@ First you need some requirements to fill up on you system.
 ```
 usage: main.py [-h] [--justOne JUSTONE] [--speed SPEED] [--createAccounts CREATEACCOUNTS] [-l] [-u U] [-p P]
 
-Auto geting blc exp. Just for fun!
+Typeracer bot for bits human typing speed.. Just for fun.
 
 options:
   -h, --help            show this help message and exit

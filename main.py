@@ -187,7 +187,7 @@ def main(speed=0.5):
 if __name__ == "__main__":
     LOGGER.setLevel(logging.CRITICAL)
     parser = argparse.ArgumentParser(
-        description='Auto geting blc exp. Just for fun!')
+        description='Typeracer bot for bits human typing speed.. Just for fun.')
     parser.add_argument('--justOne', type=str, help='Target just one mode')
     parser.add_argument('--speed', type=float, help='Set your speed')
     parser.add_argument('--createAccounts', type=int,
