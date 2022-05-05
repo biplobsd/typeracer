@@ -7,14 +7,13 @@ This selenium automaton project bit human typing speed.. Just for fun .😥
 First you need some requirements to fill up on you system.
 
 ## Requirments
-
 - Python 3.10+ (Windows [Download](https://www.python.org/downloads/))
-- Microsoft edge browser and driver 
+- [Microsoft edge browser](https://www.microsoftedgeinsider.com/en-us/download) and [WebDriver](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
+- [Selenium 4](https://pypi.org/project/selenium/)
   
 ## First time run dependency install
 ``` pip install -r requirments.txt ```
 
-<br>
 
 # Some example of use case
 
@@ -35,8 +34,6 @@ First you need some requirements to fill up on you system.
 
 ### Create fake/random accounts. It is required a human for solving recapture
 ``` python main.py --createAccounts 10```
-
-<br>
 
 # Help
 ```
