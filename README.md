@@ -1,5 +1,5 @@
 # Typeracerbot
-This selenium automaton project bit human typing speed.. Just for fun .😥
+This selenium automation project will challenge human typing speed.. Just for fun .😥
 
 ![Preview](assets/typeracer-preview.gif)
 
@@ -39,7 +39,7 @@ First you need some requirements to fill up on you system.
 ```
 usage: main.py [-h] [--justOne JUSTONE] [--speed SPEED] [--createAccounts CREATEACCOUNTS] [-l] [-u U] [-p P]
 
-Typeracer bot for bits human typing speed.. Just for fun.
+This Typeracer program for challenge human typing speed. Just for fun.
 
 options:
   -h, --help            show this help message and exit

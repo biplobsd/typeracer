@@ -23,9 +23,6 @@ import lib.multipleAcccount as multipleAcccount
 
 
 def findopj(pattern: str, delay: int = 10, inputDriver=False):
-    """
-    Find object by visibile on page
-    """
     global driver
     if inputDriver:
         driver = inputDriver
@@ -42,9 +39,6 @@ def findopj(pattern: str, delay: int = 10, inputDriver=False):
 
 
 def imageToClipboard(img_path='img.png'):
-    """
-    From image path this function set this to clipboard.
-    """
     image = Image.open(img_path)
     output = BytesIO()
     image.convert('RGB').save(output, "BMP")
@@ -184,10 +178,15 @@ def main(speed=0.5):
     print('\n')
 
 
+def disableLogging():
+    logger = logging.getLogger('selenium.webdriver.remote.remote_connection')
+    logger.setLevel(logging.CRITICAL)
+
+
 if __name__ == "__main__":
-    LOGGER.setLevel(logging.CRITICAL)
+    disableLogging()
     parser = argparse.ArgumentParser(
-        description='Typeracer bot for bits human typing speed.. Just for fun.')
+        description='This Typeracer program for challenge human typing speed. Just for fun.')
     parser.add_argument('--justOne', type=str, help='Target just one mode')
     parser.add_argument('--speed', type=float, help='Set your speed')
     parser.add_argument('--createAccounts', type=int,
