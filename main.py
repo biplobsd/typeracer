@@ -29,7 +29,7 @@ def findopj(pattern: str, delay: int = 10, inputDriver=False):
     global driver
     if inputDriver:
         driver = inputDriver
-        
+
     try:
         return WebDriverWait(driver, delay).until(
             EC.visibility_of_element_located((By.XPATH, pattern))
@@ -189,8 +189,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Auto geting blc exp. Just for fun!')
     parser.add_argument('--justOne', type=str, help='Target just one mode')
-    parser.add_argument('--speed', type=str, help='Set your speed')
-    parser.add_argument('--createAccounts', type=int, help='Create multiple accounts. It is required human for recapture solving.')
+    parser.add_argument('--speed', type=float, help='Set your speed')
+    parser.add_argument('--createAccounts', type=int,
+                        help='Create multiple accounts. It is required human for recapture solving.')
     parser.add_argument(
         '-l', action=argparse.BooleanOptionalAction, help='Set as infinity loop')
     parser.add_argument('-u', type=str, help='Set your username')
